@@ -4,6 +4,7 @@ import utils.ScannerInput
 import mu.KotlinLogging
 import utils.ScannerInput.readNextInt
 import utils.ScannerInput.readNextLine
+import kotlin.system.exitProcess
 
 private val logger = KotlinLogging.logger {}
 private val bookApi = BookApi()
@@ -46,8 +47,8 @@ fun addBook(){
     val bookTitle = readNextLine("Enter a title for the book: ")
     val isbn = readNextInt("Enter isbn of book: ")
     val author = readNextLine("Enter an author for the book: ")
-    val chapters = readNextLine("Enter chapter infomation: ")
-    val isAdded = bookApi.add(Book(bookTitle, isbn, author, chapters))
+    //val chapters = readNextLine("Enter chapter infomation: ")
+    val isAdded = bookApi.add(Book(bookTitle, isbn, author))
 
     if (isAdded) {
         println("Added Successfully")
@@ -62,8 +63,28 @@ fun listBooks(){
 }
 
 fun updateBook(){
-    return println("Update a book")
+    //return println("Update a book")
+    //logger.info { "updateBook() function invoked" }
+    listBooks()
+    if (bookApi.numberOfBooks() > 0) {
+        val indexToUpdate = readNextInt("Enter the index of the note to update: ")
+        if (bookApi.isValidIndex(indexToUpdate)) {
+            val noteTitle = readNextLine("Enter a title for the note: ")
+            val notePriority = readNextInt("Enter a priority (1-low, 2, 3, 4, 5-high): ")
+            val noteCategory = readNextLine("Enter a category for the note: ")
+
+            if (bookApi.updateBook(indexToUpdate, Book(noteTitle, notePriority, noteCategory))){
+                println("Update Successful")
+            } else {
+                println("Update Failed")
+            }
+        } else {
+            println("There are no notes for this index number")
+        }
+    }
 }
+
+
 
 fun deleteBook(){
     return println("Delete a book")
@@ -71,5 +92,5 @@ fun deleteBook(){
 
 fun exitApp(){
     logger.info { "exitApp() function invoked" }
-    System.exit(0)
+    exitProcess(0)
 }

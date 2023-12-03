@@ -1,8 +1,10 @@
 package models
 
-data class Chapters (   val number: Int,
-                        val chapterTitle: String,
-                        val numPages: Int,
-                        val numWords: Int,
-                        val includesPictures: Boolean
-    )
+data class Chapters (var number: Int,
+                     var chapterTitle: String,
+                     var numPages: Int,
+                     var numWords: Int,
+                     var includesPictures: Boolean
+    ) {
+
+}
