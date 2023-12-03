@@ -49,11 +49,11 @@ fun addBook(){
     val chapters = readNextLine("Enter chapter infomation: ")
     val isAdded = bookApi.add(Book(bookTitle, isbn, author, chapters))
 
-//    if (isAdded) {
-//        println("Added Successfully")
-//    } else {
-//        println("Add Failed")
-//    }
+    if (isAdded) {
+        println("Added Successfully")
+    } else {
+        println("Add Failed")
+    }
 }
 
 fun listBooks(){
