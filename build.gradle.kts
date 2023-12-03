@@ -21,10 +21,14 @@ tasks.test {
     useJUnitPlatform()
 }
 
+//kotlin {
+//    jvmToolchain(8)
+//}
+
 tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "17"
 }
 
-//application {
-//    mainClass.set("MainKt")
-//}
+application {
+    mainClass.set("MainKt")
+}
