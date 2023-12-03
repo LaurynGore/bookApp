@@ -57,7 +57,8 @@ fun addBook(){
 }
 
 fun listBooks(){
-    return println("List books")
+    //return println("List books")
+    println(bookApi.listAllBooks())
 }
 
 fun updateBook(){
