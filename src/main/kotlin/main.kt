@@ -1,14 +1,12 @@
 import controllers.BookApi
 import models.Book
-import models.Chapters
 import utils.ScannerInput
 import mu.KotlinLogging
-import kotlin.math.ln
 import utils.ScannerInput.readNextInt
 import utils.ScannerInput.readNextLine
 
 private val logger = KotlinLogging.logger {}
-private val book = BookApi()
+private val bookApi = BookApi()
 fun main(){
     runMenu()
 }
@@ -44,7 +42,18 @@ fun runMenu(){
 }
 
 fun addBook(){
-    return println("Add book")
+    //return println("Add book")
+    val bookTitle = readNextLine("Enter a title for the book: ")
+    val isbn = readNextInt("Enter isbn of book: ")
+    val author = readNextLine("Enter an author for the book: ")
+    val chapters = readNextLine("Enter chapter infomation: ")
+    val isAdded = bookApi.add(Book(bookTitle, isbn, author, chapters))
+
+//    if (isAdded) {
+//        println("Added Successfully")
+//    } else {
+//        println("Add Failed")
+//    }
 }
 
 fun listBooks(){
