@@ -1,6 +1,8 @@
 package utils
+
 import java.lang.NumberFormatException
-import java.util.*
+import java.util.Scanner
+
 object ScannerInput {
 
     @JvmStatic
@@ -16,7 +18,6 @@ object ScannerInput {
     }
 
 
-    @JvmStatic
     fun readNextDouble(prompt: String?): Double {
         do {
             try {
@@ -28,14 +29,11 @@ object ScannerInput {
         } while (true)
     }
 
-
     @JvmStatic
     fun readNextLine(prompt: String?): String {
         print(prompt)
         return Scanner(System.`in`).nextLine()
     }
-
-
     @JvmStatic
     fun readNextChar(prompt: String?): Char {
         print(prompt)
