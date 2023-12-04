@@ -33,4 +33,10 @@ object ScannerInput {
     fun readNextLine(prompt: String?): String {
         print(prompt)
         return Scanner(System.`in`).nextLine()
-    }}
+    }
+    @JvmStatic
+    fun readNextChar(prompt: String?): Char {
+        print(prompt)
+        return Scanner(System.`in`).next()[0]
+    }
+}

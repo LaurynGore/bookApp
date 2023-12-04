@@ -1,7 +1,13 @@
 package models
 
-data class Chapters (var chapterNum: Int = 0,
-                 var chapterTitle : String,
-                 var numWords: Int,
-                 var numPages: Int
-    )
+data class Chapter (var chapterId: Int =0 ,var chapterNum: Int, var chapterContents : String, var isChapterComplete: Boolean = false){
+
+    override fun toString(): String {
+
+        if (isChapterComplete)
+            return "$chapterNum: $chapterContents (Complete)"
+        else
+            return "chapterNum: $chapterContents (TODO)"
+    }
+
+}

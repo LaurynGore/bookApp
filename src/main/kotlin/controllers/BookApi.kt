@@ -7,10 +7,6 @@ import java.util.ArrayList
 class BookApi() {
 
     private var books = ArrayList<Book>()
-
-    // ----------------------------------------------
-    //  For Managing the id internally in the program
-    // ----------------------------------------------
     private var lastId = 0
     private fun getId() = lastId++
 
@@ -32,45 +28,47 @@ class BookApi() {
         if ((foundBook != null) && (book != null)) {
             foundBook.bookTitle = book.bookTitle
             foundBook.bookAuthor = book.bookAuthor
-            foundBook.isbn = book.isbn
+            foundBook.bookId = book.bookId
             return true
         }
 
         return false
     }
 
-//    fun archiveNote(id: Int): Boolean {
-//        val foundNote = findNote(id)
-//        if (( foundNote != null) && (!foundNote.isNoteArchived)
-//        //  && ( foundNote.checkNoteCompletionStatus())
-//        ){
-//            foundNote.isNoteArchived = true
-//            return true
-//        }
-//        return false
-//    }
+    fun archiveBook(id: Int): Boolean {
+        val foundBook = findBook(id)
+        if (( foundBook != null) && (!foundBook.isBookArchived)
+        //  && ( foundNote.checkNoteCompletionStatus())
+        ){
+            foundBook.isBookArchived = true
+            return true
+        }
+        return false
+    }
 
 
     fun listAllBooks() =
         if (books.isEmpty()) "No books stored"
         else formatListString(books)
 
-    fun listBooksByAuthor() =
-        searchBooksByAuthor(books.toString())
-//        if (numberOfBooksByAuthor() == 0) "No books stored"
-//        else formatListString(books -> !book)
+//    fun listBooksByAuthor() =
+//        searchBooksByAuthor(books.toString())
+////        if (numberOfBooksByAuthor() == 0) "No books stored"
+////        else formatListString(books -> !book)
 
-//    fun listActiveNotes() =
-//        if (numberOfActiveNotes() == 0) "No active notes stored"
-//        else formatListString(notes.filter { note -> !note.isNoteArchived })
-//
-//    fun listArchivedNotes() =
-//        if (numberOfArchivedNotes() == 0) "No archived notes stored"
-//        else formatListString(notes.filter { note -> note.isNoteArchived })
+    fun listActiveBooks() =
+        if (numberOfActiveBooks() == 0) "No active books stored"
+        else formatListString(books.filter { book -> !book.isBookArchived })
+
+    fun listArchivedBooks() =
+        if (numberOfArchivedBooks() == 0) "No archived notes stored"
+        else formatListString(books.filter { book -> book.isBookArchived })
 
     fun numberOfBooks() = books.size
+    fun numberOfArchivedBooks(): Int = books.count { book: Book -> book.isBookArchived }
+    fun numberOfActiveBooks(): Int = books.count { book: Book -> !book.isBookArchived }
 
-//    fun numberOfBooksByAuthor(): Int = books.count { book: Book -> book.bookAuthor }
+
 
 
     fun findBook(bookId: Int) = books.find { book -> book.bookId == bookId }
