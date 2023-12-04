@@ -9,13 +9,13 @@ object Utilities {
     //      name; we don't have to create an object of Utilities to use them.
 
     @JvmStatic
-    fun formatListString(notesToFormat: List<Book>): String =
-        notesToFormat
+    fun formatListString(booksToFormat: List<Book>): String =
+        booksToFormat
             .joinToString(separator = "\n") { book ->  "$book" }
 
     @JvmStatic
     fun formatSetString(itemsToFormat: Set<Chapters>): String =
         itemsToFormat
-            .joinToString(separator = "\n") { chapter ->  "\t$chapter" }
+            .joinToString(separator = "\n") { chapters ->  "\t$chapters" }
 
 }
