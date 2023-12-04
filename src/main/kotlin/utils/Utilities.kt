@@ -1,6 +1,6 @@
 package utils
 
-import models.Chapters
+import models.Chapter
 import models.Book
 
 object Utilities {
@@ -14,7 +14,7 @@ object Utilities {
             .joinToString(separator = "\n") { book ->  "$book" }
 
     @JvmStatic
-    fun formatSetString(itemsToFormat: Set<Chapters>): String =
+    fun formatSetString(itemsToFormat: Set<Chapter>): String =
         itemsToFormat
             .joinToString(separator = "\n") { chapters ->  "\t$chapters" }
 
