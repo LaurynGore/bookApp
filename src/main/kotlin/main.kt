@@ -21,12 +21,13 @@ fun runMenu() {
             6 -> addChapterToBook()
             7 -> updateChapterContentsInBook()
             8 -> deleteAChapter()
-//            9 -> markItemStatus()
+            9 -> markChapterStatus()
             10 -> searchBooks()
+            11 -> searchBooksAuthor()
 //            15 -> searchChapters()
             16 -> listActiveBooks()
             17 -> listArchivedBooks()
-//            0 -> exitApp()
+            0 -> exitApp()
             else -> println("Invalid menu choice: $option")
         }
     } while (true)
@@ -38,30 +39,23 @@ fun mainMenu() = readNextInt(
          > |                  BOOK KEEPER APP                  |
          > -----------------------------------------------------  
          > | BOOK MENU                                         |
-         > |   1) Add a note                                   |
-         > |   2) List notes                                   |
-         > |   3) Update a note                                |
-         > |   4) Delete a note                                |
-         > |   5) Archive a note                               |
+         > |   1) Add a book                                   |
+         > |   2) List books                                   |
+         > |   3) Update a book                                |
+         > |   4) Delete a book                                |
+         > |   5) Archive a book                               |
          > -----------------------------------------------------  
-         > | CHAPTER MENU                                         | 
-         > |   6) Add item to a note                           |
-         > |   7) Update item contents on a note               |
-         > |   8) Delete item from a note                      |
-         > |   9) Mark item as complete/todo                   | 
+         > | CHAPTER MENU                                      | 
+         > |   6) Add chapter to a book                        |
+         > |   7) Update chapter contents on a book            |
+         > |   8) Delete chapter from a book                   |
          > -----------------------------------------------------  
          > | REPORT MENU FOR BOOKS                             | 
-         > |   10) Search for all notes (by note title)        |
-         > |   11) .....                                       |
-         > |   12) .....                                       |
-         > |   13) .....                                       |
-         > |   14) .....                                       |
+         > |   10) Search for all books (by book title)        |
+         > |   11) Search for all books (by book Author)       |
          > -----------------------------------------------------  
          > | REPORT MENU FOR CHAPTERS                          |                                
          > |   15) Search for all Chapters                     |
-         > |   16) .....                                       |
-         > |   17) .....                                       |
-         > |   18) .....                                       |
          > -----------------------------------------------------  
          > |   0) Exit                                         |
          > -----------------------------------------------------  
@@ -111,6 +105,10 @@ fun listAllBooks() = println(bookApi.listAllBooks())
 fun listActiveBooks() = println(bookApi.listActiveBooks())
 fun listArchivedBooks() = println(bookApi.listArchivedBooks())
 
+fun exitApp() {
+    println("Exiting...bye")
+    exitProcess(0)
+}
 fun updateBook() {
     listBooks()
     if (bookApi.numberOfBooks() > 0) {
@@ -225,12 +223,21 @@ fun markChapterStatus() {
     }
 }
 
-
 fun searchBooks() {
-    val searchAuthor = readNextLine("Enter the description to search by: ")
+    val searchTitle = readNextLine("Enter the description to search by: ")
+    val searchResults = bookApi.searchBooksByTitle(searchTitle)
+    if (searchResults.isEmpty()) {
+        println("No boolss found")
+    } else {
+        println(searchResults)
+    }
+}
+
+fun searchBooksAuthor() {
+    val searchAuthor = readNextLine("Enter the author: ")
     val searchResults = bookApi.searchBooksByAuthor(searchAuthor)
     if (searchResults.isEmpty()) {
-        println("No notes found")
+        println("No books found")
     } else {
         println(searchResults)
     }
@@ -267,10 +274,7 @@ fun searchBooks() {
 //------------------------------------
 // Exit App
 //------------------------------------
-fun exitApp() {
-    println("Exiting...bye")
-    exitProcess(0)
-}
+
 
 //------------------------------------
 //HELPER FUNCTIONS
@@ -298,8 +302,8 @@ private fun askUserToChooseChapter(book: Book): Chapter? {
         print(book.listItems())
         return book.findOne(readNextInt("\nEnter the chapter number : "))
     }
-    else{
-        println ("No items for chosen note")
+    else {
+        println("No items for chosen note")
         return null
     }
 }

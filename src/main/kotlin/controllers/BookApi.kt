@@ -51,11 +51,6 @@ class BookApi() {
         if (books.isEmpty()) "No books stored"
         else formatListString(books)
 
-//    fun listBooksByAuthor() =
-//        searchBooksByAuthor(books.toString())
-////        if (numberOfBooksByAuthor() == 0) "No books stored"
-////        else formatListString(books -> !book)
-
     fun listActiveBooks() =
         if (numberOfActiveBooks() == 0) "No active books stored"
         else formatListString(books.filter { book -> !book.isBookArchived })
@@ -72,6 +67,11 @@ class BookApi() {
 
 
     fun findBook(bookId: Int) = books.find { book -> book.bookId == bookId }
+
+    fun searchBooksByTitle(searchString: String) =
+        formatListString(
+            books.filter { book -> book.bookTitle.contains(searchString, ignoreCase = true) }
+        )
 
     fun searchBooksByAuthor(searchString: String) =
         formatListString(books.filter { book -> book.bookAuthor.contains(searchString, ignoreCase = true) })
