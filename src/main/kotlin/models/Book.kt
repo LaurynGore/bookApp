@@ -14,9 +14,9 @@ data class Book(
     private var lastItemId = 0
     private fun getItemId() = lastItemId++
 
-    fun addChapter(chapters: Chapter) : Boolean {
-        chapters.chapterNum = getItemId()
-        return chapters.add(chapters)
+    fun addChapter(chapter: Chapter) : Boolean {
+        chapter.chapterNum = getItemId()
+        return chapters.add(chapter)
     }
 
     fun numberOfChapters() = chapters.size
